@@ -61,14 +61,13 @@ const fullOgImage = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     )}
 
-    <!-- Google Analytics 4 — Replace with your real measurement ID -->
-    <!-- TODO: Replace GA_MEASUREMENT_ID with your actual G-XXXXXXXXXX ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBM8NRV9ZD"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
+      gtag('config', 'G-GBM8NRV9ZD');
     </script>
 
     <!-- AdSense -->
