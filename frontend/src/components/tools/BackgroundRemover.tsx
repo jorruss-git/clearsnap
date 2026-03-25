@@ -38,7 +38,12 @@ export default function BackgroundRemover() {
       setResultSrc(URL.createObjectURL(blob));
       setStatus("Done! Your background is removed.");
     } catch (err) {
-      setStatus(err instanceof Error ? err.message : "Upload failed.");
+      const msg = err instanceof Error ? err.message : "Upload failed.";
+      if (msg === "Failed to fetch" || msg.includes("NetworkError")) {
+        setStatus("Could not reach the background removal server. Make sure the API is running.");
+      } else {
+        setStatus(msg);
+      }
     } finally {
       setLoading(false);
     }

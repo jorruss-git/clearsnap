@@ -7,6 +7,11 @@ export default defineConfig({
   output: "static",
   integrations: [preact(), sitemap()],
   vite: {
+    server: {
+      proxy: {
+        "/api": "http://localhost:8000",
+      },
+    },
     build: {
       rollupOptions: {
         output: {
