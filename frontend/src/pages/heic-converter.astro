@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import ToolPage from "../components/ToolPage.astro";
+// import HeicConverter from "../components/tools/HeicConverter";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ClearSnap HEIC to JPG Converter",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  url: "https://clearsnap.app/heic-converter",
+  description: "Free online HEIC to JPG converter. Convert iPhone HEIC photos to JPG or PNG instantly in your browser.",
+};
+
+const features = [
+  { title: "Built for iPhone Photos", text: "HEIC is the default format on iPhones. Convert your photos to universally compatible JPG or PNG in one click." },
+  { title: "Choose Your Format", text: "Output as JPG for smaller files or PNG for lossless quality with transparency support." },
+  { title: "100% Browser-Based", text: "HEIC decoding runs entirely in your browser. Your iPhone photos are never uploaded to any server." },
+  { title: "No App Required", text: "No need to install software or change your iPhone settings. Just upload a HEIC file and download the result." },
+];
+
+const faq = [
+  { question: "What is HEIC?", answer: "HEIC (High Efficiency Image Container) is the default photo format on iPhones and iPads since iOS 11. It produces smaller files than JPG while maintaining image quality, but isn't universally supported by all apps and websites." },
+  { question: "Why can't I open HEIC files on my computer?", answer: "Windows and some older apps don't natively support HEIC. Converting to JPG or PNG makes your photos compatible with virtually any device, app, or website." },
+  { question: "Does converting from HEIC reduce quality?", answer: "Converting to PNG is lossless — no quality loss. Converting to JPG involves minimal compression, but the difference is imperceptible for most photos." },
+  { question: "Is there a file size limit?", answer: "You can convert HEIC files up to 50 MB. Most iPhone photos are 2-5 MB, so this covers virtually all cases." },
+  { question: "Are my photos uploaded to a server?", answer: "No. HEIC decoding runs entirely in your browser. Your photos never leave your device." },
+  { question: "Can I convert multiple HEIC files at once?", answer: "For batch conversion, use our Batch Processor tool which supports HEIC files and can process up to 20 images at once." },
+];
+
+const relatedTools = [
+  { name: "Batch Processor", href: "/batch", description: "Convert multiple HEIC files at once with batch processing." },
+  { name: "Image Resizer", href: "/resize", description: "Resize your converted photos for social media or web." },
+  { name: "Format Converter", href: "/convert", description: "Convert between JPG, PNG, and WebP with quality control." },
+];
+---
+
+<Base
+  title="Free HEIC to JPG Converter — Convert iPhone Photos Online | ClearSnap"
+  description="Convert HEIC photos to JPG or PNG for free. Turn iPhone photos into universally compatible files instantly in your browser. No upload, no signup."
+  schema={schema}
+>
+  <ToolPage
+    title="Free HEIC to JPG Converter"
+    description="Convert iPhone HEIC photos to JPG or PNG instantly. Runs in your browser — your photos never leave your device."
+    features={features}
+    faq={faq}
+    relatedTools={relatedTools}
+  >
+    <!-- TODO: Add <HeicConverter client:load /> once component is implemented -->
+    <div class="uploader" style="margin-bottom: 16px;">
+      <div class="uploader-body">
+        <div class="uploader-icon" aria-hidden="true">+</div>
+        <p class="uploader-title">Drop a HEIC photo here</p>
+        <p class="uploader-meta">or click to choose a file (max 50 MB)</p>
+      </div>
+    </div>
+  </ToolPage>
+</Base>

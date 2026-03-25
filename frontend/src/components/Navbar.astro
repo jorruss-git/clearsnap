@@ -1,0 +1,42 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const tools = [
+  { href: "/background-remover", label: "BG Remover" },
+  { href: "/resize", label: "Resize" },
+  { href: "/convert", label: "Convert" },
+  { href: "/heic-converter", label: "HEIC" },
+  { href: "/batch", label: "Batch" },
+  { href: "/crop", label: "Crop" },
+];
+---
+
+<header class="topbar" aria-label="Site header">
+  <div class="topbar-inner">
+    <a href="/" class="logo-text">ClearSnap</a>
+    <nav>
+      <ul class="nav-links" aria-label="Image tools">
+        {tools.map((tool) => (
+          <li>
+            <a
+              href={tool.href}
+              class="nav-link"
+              aria-current={currentPath === tool.href ? "page" : undefined}
+            >
+              {tool.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="topbar-actions">
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

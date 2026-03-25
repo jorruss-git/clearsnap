@@ -1,0 +1,119 @@
+---
+import AdSlot from "./AdSlot.astro";
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Feature {
+  title: string;
+  text: string;
+}
+
+interface RelatedTool {
+  name: string;
+  href: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  features?: Feature[];
+  faq?: FAQ[];
+  relatedTools?: RelatedTool[];
+  /** AdSense slot IDs — create unique ones in your AdSense dashboard */
+  adSlotTop?: string;
+  adSlotMid?: string;
+  adSlotBottom?: string;
+}
+
+const {
+  title,
+  description,
+  features = [],
+  faq = [],
+  relatedTools = [],
+  adSlotTop = "PLACEHOLDER_TOP",
+  adSlotMid = "PLACEHOLDER_MID",
+  adSlotBottom = "PLACEHOLDER_BOTTOM",
+} = Astro.props;
+
+// Build FAQPage schema for rich snippets
+const faqSchema = faq.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    }
+  : null;
+---
+
+<div class="tool-header">
+  <h1>{title}</h1>
+  <p>{description}</p>
+</div>
+
+<AdSlot slotId={adSlotTop} />
+
+<section class="card" aria-label={title}>
+  <!-- Tool component goes here via slot -->
+  <slot />
+</section>
+
+<AdSlot slotId={adSlotMid} />
+
+{features.length > 0 && (
+  <section class="content-section">
+    <h2>Features</h2>
+    <div class="features-grid">
+      {features.map((feature) => (
+        <div class="feature-card">
+          <h3>{feature.title}</h3>
+          <p>{feature.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+{faq.length > 0 && (
+  <section class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <ul class="faq-list">
+      {faq.map((item) => (
+        <li class="faq-item">
+          <p class="faq-question">{item.question}</p>
+          <p class="faq-answer">{item.answer}</p>
+        </li>
+      ))}
+    </ul>
+    {faqSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    )}
+  </section>
+)}
+
+{relatedTools.length > 0 && (
+  <section class="content-section">
+    <h2>You Might Also Need</h2>
+    <div class="related-tools">
+      {relatedTools.map((tool) => (
+        <a href={tool.href} class="related-tool-card">
+          <h3>{tool.name}</h3>
+          <p>{tool.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<AdSlot slotId={adSlotBottom} />

@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import ToolPage from "../components/ToolPage.astro";
+// import Resizer from "../components/tools/Resizer";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ClearSnap Image Resizer",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  url: "https://clearsnap.app/resize",
+  description: "Free online image resizer. Resize photos for social media, web, or custom dimensions instantly.",
+};
+
+const features = [
+  { title: "Preset Sizes", text: "One-click presets for Instagram Square (1080x1080), Instagram Portrait (1080x1350), HD (1920x1080), and Thumbnail (300x300)." },
+  { title: "Custom Dimensions", text: "Enter exact width and height in pixels, or scale by percentage. Aspect ratio lock keeps proportions perfect." },
+  { title: "Instant Processing", text: "Resizing happens entirely in your browser — no upload, no waiting, no server involved." },
+  { title: "Large File Support", text: "Handle photos up to 50 MB. Your high-resolution camera shots work without downscaling first." },
+];
+
+const faq = [
+  { question: "Is the image resizer free?", answer: "Yes, completely free with no limits on usage or file count." },
+  { question: "Are my photos uploaded anywhere?", answer: "No. Resizing runs 100% in your browser using the Canvas API. Your photos never leave your device." },
+  { question: "What is the maximum file size?", answer: "You can resize images up to 50 MB. There is no limit on output resolution." },
+  { question: "Can I resize to exact dimensions?", answer: "Yes. Enter width and height manually, use a preset, or scale by percentage. You can lock the aspect ratio to prevent distortion." },
+  { question: "What output format do I get?", answer: "Resized images are downloaded as PNG files, which preserve quality without compression artifacts." },
+];
+
+const relatedTools = [
+  { name: "Crop Tool", href: "/crop", description: "Crop before or after resizing for the perfect composition." },
+  { name: "Format Converter", href: "/convert", description: "Convert your resized PNG to JPG or WebP for smaller file sizes." },
+  { name: "Batch Processor", href: "/batch", description: "Need to resize many images? Process up to 20 at once." },
+];
+---
+
+<Base
+  title="Free Online Image Resizer — Resize Photos Instantly | ClearSnap"
+  description="Resize images for Instagram, web, or any custom size. Free online photo resizer with presets, custom dimensions, and percentage scaling. No upload required — runs in your browser."
+  schema={schema}
+>
+  <ToolPage
+    title="Free Online Image Resizer"
+    description="Resize photos for social media, web, or custom sizes in seconds. Runs entirely in your browser — your photos stay private."
+    features={features}
+    faq={faq}
+    relatedTools={relatedTools}
+  >
+    <!-- TODO: Add <Resizer client:load /> once component is implemented -->
+    <div class="uploader" style="margin-bottom: 16px;">
+      <div class="uploader-body">
+        <div class="uploader-icon" aria-hidden="true">+</div>
+        <p class="uploader-title">Drop a photo here</p>
+        <p class="uploader-meta">or click to choose a file (max 50 MB)</p>
+      </div>
+    </div>
+  </ToolPage>
+</Base>

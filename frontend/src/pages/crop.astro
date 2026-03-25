@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import ToolPage from "../components/ToolPage.astro";
+// import CropTool from "../components/tools/CropTool";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ClearSnap Crop Tool",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  url: "https://clearsnap.app/crop",
+  description: "Free online image cropper. Crop photos with drag selection and preset aspect ratios.",
+};
+
+const features = [
+  { title: "Drag to Crop", text: "Click and drag to draw your crop area, then resize or move it until it's perfect." },
+  { title: "Aspect Ratio Presets", text: "Quick presets for 1:1 (square), 4:3, 3:4, 16:9 (widescreen), and 9:16 (stories/reels)." },
+  { title: "Precision Handles", text: "Eight resize handles let you fine-tune the crop area from any edge or corner." },
+  { title: "Instant & Private", text: "Cropping happens entirely in your browser. No upload, no waiting, no server." },
+];
+
+const faq = [
+  { question: "How do I crop an image?", answer: "Upload a photo, then drag on the image to select the area you want to keep. Use the handles to resize, or click a preset aspect ratio. Hit 'Crop' and download your result." },
+  { question: "What aspect ratio presets are available?", answer: "1:1 (Instagram square), 4:3 (standard photo), 3:4 (portrait), 16:9 (YouTube/widescreen), and 9:16 (Instagram Stories/Reels)." },
+  { question: "Is there a file size limit?", answer: "You can crop images up to 50 MB. Processing is instant since everything runs in your browser." },
+  { question: "Are my photos uploaded anywhere?", answer: "No. Cropping runs 100% in your browser. Your photos never leave your device." },
+  { question: "What format is the output?", answer: "Cropped images are downloaded as PNG files, which preserve full quality." },
+];
+
+const relatedTools = [
+  { name: "Image Resizer", href: "/resize", description: "Resize your cropped image to specific dimensions for social media or web." },
+  { name: "Background Remover", href: "/background-remover", description: "Remove the background from your cropped image." },
+  { name: "Format Converter", href: "/convert", description: "Convert your cropped PNG to JPG or WebP for smaller file sizes." },
+];
+---
+
+<Base
+  title="Free Online Image Cropper — Crop Photos with Presets | ClearSnap"
+  description="Crop images for free with drag selection and aspect ratio presets (1:1, 4:3, 16:9). Runs in your browser — your photos stay private."
+  schema={schema}
+>
+  <ToolPage
+    title="Free Online Image Cropper"
+    description="Crop photos with precision. Drag to select or use preset aspect ratios. Runs entirely in your browser."
+    features={features}
+    faq={faq}
+    relatedTools={relatedTools}
+  >
+    <!-- TODO: Add <CropTool client:load /> once component is implemented -->
+    <div class="uploader" style="margin-bottom: 16px;">
+      <div class="uploader-body">
+        <div class="uploader-icon" aria-hidden="true">+</div>
+        <p class="uploader-title">Drop a photo here</p>
+        <p class="uploader-meta">or click to choose a file (max 50 MB)</p>
+      </div>
+    </div>
+  </ToolPage>
+</Base>

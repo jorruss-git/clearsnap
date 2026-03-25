@@ -1,0 +1,98 @@
+---
+import Base from "../layouts/Base.astro";
+import AdSlot from "../components/AdSlot.astro";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "ClearSnap",
+  url: "https://clearsnap.app",
+  description: "Free online photo tools for background removal, resizing, format conversion, cropping, and HEIC to JPG.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://clearsnap.app/{search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const tools = [
+  {
+    href: "/background-remover",
+    title: "Background Remover",
+    description: "Remove photo backgrounds with one click. Perfect for product photos, portraits, and social media.",
+  },
+  {
+    href: "/resize",
+    title: "Image Resizer",
+    description: "Resize photos for Instagram, web, or custom dimensions. Preset sizes and percentage scaling.",
+  },
+  {
+    href: "/convert",
+    title: "Format Converter",
+    description: "Convert images between JPG, PNG, and WebP with adjustable quality settings.",
+  },
+  {
+    href: "/heic-converter",
+    title: "HEIC to JPG/PNG",
+    description: "Convert iPhone HEIC photos to universally compatible JPG or PNG files instantly.",
+  },
+  {
+    href: "/batch",
+    title: "Batch Processor",
+    description: "Resize and convert up to 20 images at once. Download everything as a single ZIP file.",
+  },
+  {
+    href: "/crop",
+    title: "Crop Tool",
+    description: "Crop photos with precision. Drag to select or use preset aspect ratios like 1:1, 4:3, and 16:9.",
+  },
+];
+---
+
+<Base
+  title="ClearSnap — Free Online Photo Tools"
+  description="Edit photos in seconds with free online tools: background remover, image resizer, format converter, HEIC to JPG, batch processor, and crop tool. No signup required."
+  schema={schema}
+>
+  <header class="hero" style="text-align: center; margin-bottom: 28px;">
+    <img
+      src="/images/logo_clear_notxt.png"
+      alt="ClearSnap logo"
+      width="140"
+      height="140"
+      style="margin-bottom: 8px;"
+    />
+    <h1>Free Online Photo Tools</h1>
+    <p style="color: var(--muted); font-size: 1.05rem; margin: 0;">
+      Edit your photos in seconds with simple, always-free tools. No signup required.
+    </p>
+  </header>
+
+  <AdSlot slotId="PLACEHOLDER_HOME_TOP" />
+
+  <section class="tool-cards">
+    {tools.map((tool) => (
+      <a href={tool.href} class="tool-card">
+        <h2>{tool.title}</h2>
+        <p>{tool.description}</p>
+      </a>
+    ))}
+  </section>
+
+  <section class="trust-grid">
+    <div class="trust-item">
+      <h3>100% Free</h3>
+      <p>Every tool is free to use, no hidden fees or premium tiers.</p>
+    </div>
+    <div class="trust-item">
+      <h3>No Signup Required</h3>
+      <p>Just open a tool and start editing. No account needed.</p>
+    </div>
+    <div class="trust-item">
+      <h3>Your Photos Stay Private</h3>
+      <p>Most tools run entirely in your browser. Files never leave your device.</p>
+    </div>
+  </section>
+
+  <AdSlot slotId="PLACEHOLDER_HOME_BOTTOM" />
+</Base>

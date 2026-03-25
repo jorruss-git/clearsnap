@@ -1,0 +1,21 @@
+---
+const tools = [
+  { href: "/background-remover", label: "Background Remover" },
+  { href: "/resize", label: "Image Resizer" },
+  { href: "/convert", label: "Format Converter" },
+  { href: "/heic-converter", label: "HEIC Converter" },
+  { href: "/batch", label: "Batch Processor" },
+  { href: "/crop", label: "Crop Tool" },
+];
+---
+
+<footer class="footer">
+  <ul class="footer-links">
+    {tools.map((tool) => (
+      <li><a href={tool.href}>{tool.label}</a></li>
+    ))}
+  </ul>
+  <p class="small">
+    ClearSnap.app &mdash; Free online photo tools. Your photos stay private.
+  </p>
+</footer>

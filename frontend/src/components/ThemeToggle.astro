@@ -1,0 +1,30 @@
+---
+---
+
+<label class="mode-toggle">
+  <span class="mode-label">Dark mode</span>
+  <span class="switch">
+    <input id="themeToggle" type="checkbox" />
+    <span class="slider" aria-hidden="true"></span>
+  </span>
+</label>
+
+<script is:inline>
+  (function() {
+    var toggle = document.getElementById('themeToggle');
+    if (!toggle) return;
+
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    toggle.checked = isDark;
+
+    toggle.addEventListener('change', function() {
+      if (toggle.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  })();
+</script>

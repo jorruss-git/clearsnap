@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import ToolPage from "../components/ToolPage.astro";
+// import BatchProcessor from "../components/tools/BatchProcessor";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ClearSnap Batch Image Processor",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  url: "https://clearsnap.app/batch",
+  description: "Free online batch image processor. Resize and convert up to 20 images at once, download as a ZIP.",
+};
+
+const features = [
+  { title: "Process Up to 20 Images", text: "Upload up to 20 images, apply one set of resize and format settings, and download everything as a single ZIP file." },
+  { title: "Resize + Convert Combined", text: "Resize by preset, custom dimensions, or percentage — and convert to JPG, PNG, or WebP — all in one step." },
+  { title: "HEIC Support", text: "Batch processing automatically detects and converts HEIC files from iPhones alongside standard image formats." },
+  { title: "Browser-Based Privacy", text: "All processing happens in your browser. Your images are never uploaded to any server." },
+];
+
+const faq = [
+  { question: "How many images can I process at once?", answer: "You can process up to 20 images in a single batch. Each image can be up to 50 MB." },
+  { question: "What output formats are available?", answer: "Choose from JPG, PNG, or WebP. A quality slider is available for JPG and WebP to control file size." },
+  { question: "How do I download the results?", answer: "After processing, all images are packaged into a single ZIP file that downloads to your computer." },
+  { question: "Are my photos uploaded to a server?", answer: "No. Batch processing runs entirely in your browser. Your images are processed locally and never leave your device." },
+  { question: "Can I batch process HEIC files?", answer: "Yes. The batch processor automatically detects HEIC/HEIF files and converts them alongside standard image formats." },
+];
+
+const relatedTools = [
+  { name: "Image Resizer", href: "/resize", description: "Resize a single image with more control over dimensions." },
+  { name: "Format Converter", href: "/convert", description: "Convert a single image with quality preview." },
+  { name: "HEIC Converter", href: "/heic-converter", description: "Simple one-click conversion for individual HEIC files." },
+];
+---
+
+<Base
+  title="Free Batch Image Resizer & Converter — Process 20 Photos at Once | ClearSnap"
+  description="Resize and convert up to 20 images at once for free. Batch process photos with custom sizes, format conversion, and ZIP download. Runs in your browser."
+  schema={schema}
+>
+  <ToolPage
+    title="Batch Image Resizer & Converter"
+    description="Upload up to 20 images, apply one set of settings, and download a ZIP. Runs entirely in your browser."
+    features={features}
+    faq={faq}
+    relatedTools={relatedTools}
+  >
+    <!-- TODO: Add <BatchProcessor client:load /> once component is implemented -->
+    <div class="uploader" style="margin-bottom: 16px;">
+      <div class="uploader-body">
+        <div class="uploader-icon" aria-hidden="true">+</div>
+        <p class="uploader-title">Drop up to 20 photos</p>
+        <p class="uploader-meta">or click to choose files (max 50 MB each)</p>
+      </div>
+    </div>
+  </ToolPage>
+</Base>

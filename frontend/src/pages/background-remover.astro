@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import ToolPage from "../components/ToolPage.astro";
+// import BackgroundRemover from "../components/tools/BackgroundRemover";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ClearSnap Background Remover",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  url: "https://clearsnap.app/background-remover",
+  description: "Free online background remover. Remove photo backgrounds instantly with AI-powered processing.",
+};
+
+const features = [
+  { title: "One-Click Removal", text: "Upload your photo and get a clean, transparent background in seconds. No manual editing required." },
+  { title: "AI-Powered Accuracy", text: "Advanced machine learning accurately detects subjects in portraits, product photos, and complex scenes." },
+  { title: "High-Resolution Output", text: "Download your result as a full-resolution PNG with transparent background, ready for any use." },
+  { title: "Works With Any Photo", text: "People, products, animals, objects — the AI handles a wide range of subjects and backgrounds." },
+];
+
+const faq = [
+  { question: "Is the background remover free?", answer: "Yes, ClearSnap's background remover is completely free with no hidden costs, watermarks, or usage limits." },
+  { question: "Are my photos stored on your server?", answer: "No. Your photo is uploaded to our server for AI processing, but it is processed in memory and discarded immediately. We never store, log, or share your images." },
+  { question: "What file formats are supported?", answer: "You can upload JPG, PNG, WebP, and most common image formats. The result is always downloaded as a PNG with a transparent background." },
+  { question: "What is the maximum file size?", answer: "The background remover supports images up to 10 MB." },
+  { question: "How long does processing take?", answer: "Most images are processed in 3-10 seconds depending on image size and complexity." },
+];
+
+const relatedTools = [
+  { name: "Image Resizer", href: "/resize", description: "Resize your background-removed image for social media or web." },
+  { name: "Format Converter", href: "/convert", description: "Convert your PNG result to JPG or WebP for smaller file sizes." },
+  { name: "Crop Tool", href: "/crop", description: "Crop your image to the perfect composition after removing the background." },
+];
+---
+
+<Base
+  title="Free Background Remover — Remove Photo Backgrounds Online | ClearSnap"
+  description="Remove backgrounds from photos instantly with ClearSnap's free AI-powered background remover. No signup required. Upload a photo and download a transparent PNG."
+  schema={schema}
+>
+  <ToolPage
+    title="Free Background Remover"
+    description="Remove photo backgrounds instantly with AI. Upload a photo, get a transparent PNG in seconds."
+    features={features}
+    faq={faq}
+    relatedTools={relatedTools}
+  >
+    <!-- TODO: Add <BackgroundRemover client:load /> once component is implemented -->
+    <div class="uploader" style="margin-bottom: 16px;">
+      <div class="uploader-body">
+        <div class="uploader-icon" aria-hidden="true">+</div>
+        <p class="uploader-title">Drop a photo here</p>
+        <p class="uploader-meta">or click to choose a file (max 10 MB)</p>
+      </div>
+    </div>
+    <p class="privacy-notice">
+      This tool processes your photo on our secure server. Your image is never stored and is discarded immediately after processing. All other ClearSnap tools run entirely in your browser.
+    </p>
+  </ToolPage>
+</Base>

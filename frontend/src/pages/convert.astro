@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import ToolPage from "../components/ToolPage.astro";
+// import Converter from "../components/tools/Converter";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ClearSnap Format Converter",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "Web",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  url: "https://clearsnap.app/convert",
+  description: "Free online image format converter. Convert photos to JPG, PNG, or WebP with adjustable quality.",
+};
+
+const features = [
+  { title: "Three Popular Formats", text: "Convert between JPG, PNG, and WebP — the three formats that cover virtually every use case." },
+  { title: "Quality Control", text: "Adjustable quality slider for JPG and WebP lets you find the perfect balance between file size and image quality." },
+  { title: "Browser-Based Privacy", text: "Conversion happens entirely in your browser. Your images are never uploaded to any server." },
+  { title: "Instant Results", text: "See a live preview as you change formats and quality settings. Download when you're happy with the result." },
+];
+
+const faq = [
+  { question: "What formats can I convert between?", answer: "ClearSnap supports conversion to and from JPG, PNG, and WebP. Upload any common image format and choose your desired output." },
+  { question: "What's the difference between JPG, PNG, and WebP?", answer: "JPG is best for photographs with small file sizes. PNG preserves transparency and is lossless. WebP offers the best of both — small files with optional transparency — and is supported by all modern browsers." },
+  { question: "Does conversion reduce image quality?", answer: "PNG is lossless, so no quality loss. JPG and WebP use compression — use the quality slider to control the tradeoff. Higher quality means larger files." },
+  { question: "Is there a file size limit?", answer: "You can convert images up to 50 MB. Processing is instant since everything runs in your browser." },
+  { question: "Are my photos uploaded to a server?", answer: "No. Format conversion runs 100% in your browser using the Canvas API. Your photos never leave your device." },
+];
+
+const relatedTools = [
+  { name: "Image Resizer", href: "/resize", description: "Resize your image before or after converting formats." },
+  { name: "HEIC Converter", href: "/heic-converter", description: "Got iPhone photos? Convert HEIC files to JPG or PNG." },
+  { name: "Batch Processor", href: "/batch", description: "Convert many images at once with batch processing." },
+];
+---
+
+<Base
+  title="Free Image Format Converter — JPG, PNG, WebP | ClearSnap"
+  description="Convert images between JPG, PNG, and WebP for free. Adjustable quality, instant results, and complete privacy — runs entirely in your browser."
+  schema={schema}
+>
+  <ToolPage
+    title="Free Image Format Converter"
+    description="Convert photos to JPG, PNG, or WebP with adjustable quality. Runs entirely in your browser — your photos stay private."
+    features={features}
+    faq={faq}
+    relatedTools={relatedTools}
+  >
+    <!-- TODO: Add <Converter client:load /> once component is implemented -->
+    <div class="uploader" style="margin-bottom: 16px;">
+      <div class="uploader-body">
+        <div class="uploader-icon" aria-hidden="true">+</div>
+        <p class="uploader-title">Drop a photo here</p>
+        <p class="uploader-meta">or click to choose a file (max 50 MB)</p>
+      </div>
+    </div>
+  </ToolPage>
+</Base>

@@ -1,0 +1,24 @@
+{
+  "name": "clearsnap",
+  "type": "module",
+  "version": "2.0.0",
+  "description": "ClearSnap.app — Free online photo tools",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.7.0",
+    "@astrojs/preact": "^4.1.0",
+    "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/check": "^0.9.0",
+    "preact": "^10.25.0",
+    "heic2any": "^0.0.4",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}
