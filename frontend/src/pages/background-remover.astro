@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ToolPage from "../components/ToolPage.astro";
-// import BackgroundRemover from "../components/tools/BackgroundRemover";
+import BackgroundRemover from "../components/tools/BackgroundRemover";
 
 const schema = {
   "@context": "https://schema.org",
@@ -48,14 +48,7 @@ const relatedTools = [
     faq={faq}
     relatedTools={relatedTools}
   >
-    <!-- TODO: Add <BackgroundRemover client:load /> once component is implemented -->
-    <div class="uploader" style="margin-bottom: 16px;">
-      <div class="uploader-body">
-        <div class="uploader-icon" aria-hidden="true">+</div>
-        <p class="uploader-title">Drop a photo here</p>
-        <p class="uploader-meta">or click to choose a file (max 10 MB)</p>
-      </div>
-    </div>
+    <BackgroundRemover client:load />
     <p class="privacy-notice">
       This tool processes your photo on our secure server. Your image is never stored and is discarded immediately after processing. All other ClearSnap tools run entirely in your browser.
     </p>

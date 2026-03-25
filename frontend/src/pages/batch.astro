@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ToolPage from "../components/ToolPage.astro";
-// import BatchProcessor from "../components/tools/BatchProcessor";
+import BatchProcessor from "../components/tools/BatchProcessor";
 
 const schema = {
   "@context": "https://schema.org",
@@ -48,13 +48,6 @@ const relatedTools = [
     faq={faq}
     relatedTools={relatedTools}
   >
-    <!-- TODO: Add <BatchProcessor client:load /> once component is implemented -->
-    <div class="uploader" style="margin-bottom: 16px;">
-      <div class="uploader-body">
-        <div class="uploader-icon" aria-hidden="true">+</div>
-        <p class="uploader-title">Drop up to 20 photos</p>
-        <p class="uploader-meta">or click to choose files (max 50 MB each)</p>
-      </div>
-    </div>
+    <BatchProcessor client:load />
   </ToolPage>
 </Base>

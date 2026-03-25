@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ToolPage from "../components/ToolPage.astro";
-// import Resizer from "../components/tools/Resizer";
+import Resizer from "../components/tools/Resizer";
 
 const schema = {
   "@context": "https://schema.org",
@@ -48,13 +48,6 @@ const relatedTools = [
     faq={faq}
     relatedTools={relatedTools}
   >
-    <!-- TODO: Add <Resizer client:load /> once component is implemented -->
-    <div class="uploader" style="margin-bottom: 16px;">
-      <div class="uploader-body">
-        <div class="uploader-icon" aria-hidden="true">+</div>
-        <p class="uploader-title">Drop a photo here</p>
-        <p class="uploader-meta">or click to choose a file (max 50 MB)</p>
-      </div>
-    </div>
+    <Resizer client:load />
   </ToolPage>
 </Base>
