@@ -53,8 +53,8 @@ Took the v2.0 scaffold (created on Windows) and turned it into a working dev bui
 ### Known Issues
 
 - Background remover requires FastAPI server running (`api/server.py`) — only tool that needs backend
-- Hostinger MCP server added to `.claude.json` but needs Claude Code restart to connect
-- VPS SSH: Mac's public key (`~/.ssh/id_ed25519.pub`) not yet authorized on server (76.13.29.227)
+- VPS SSH key attached via Hostinger API — connect with: `ssh -i ~/.ssh/id_ed25519 root@76.13.29.227` (blocked on port 22 at current network, try from home)
+- VPS runs **CloudPanel** (not raw Docker) — may deploy via CloudPanel instead of docker-compose
 
 ---
 
