@@ -1,45 +1,88 @@
-# ClearSnap v2.0 — Handover
+# Session Handover
 
-## Session: 2026-03-25
+**Date:** 2026-03-25
+**Scope:** Wire up scaffold into working app — fonts, components, crop tool, GA4
+**Status:** In Progress
 
-### What Was Done
-Complete project scaffold for the ClearSnap v2.0 rewrite. Created on Windows, to be implemented on Mac.
+---
 
-**Created from scratch:**
-- Full Astro project structure with Preact integration and sitemap
-- `Base.astro` layout with proper SEO (OG tags, Twitter cards, schema.org, canonical URLs)
-- `Navbar.astro` with links to all 6 tool pages (active state via aria-current)
-- `Footer.astro` with tool links
-- `ThemeToggle.astro` with localStorage persistence and FOUC prevention
-- `ToolPage.astro` — shared tool page template with ad slots, features grid, FAQ with schema.org, and related tools section
-- `AdSlot.astro` — reusable ad unit component
-- 7 page routes: landing + 6 tools, each with unique title, meta description, Schema.org, features, FAQ, and related tools content
-- `robots.txt` endpoint pointing to sitemap
-- `global.css` — complete design system ported from v1 with improvements (CSS variables, self-hosted font declarations, dark mode, all component styles)
-- 5 TypeScript library modules: `canvas.ts` (resize/crop/convert), `heic.ts` (lazy-loaded HEIC decoding), `download.ts`, `validate.ts`, `analytics.ts`
-- 8 Preact components: `Uploader`, `ImagePreview`, `BackgroundRemover`, `Resizer`, `Converter`, `HeicConverter`, `BatchProcessor`, `CropTool`
-- Hardened `api/server.py` — single `/api/remove` endpoint with rate limiting (slowapi), CORS, async processing via ProcessPoolExecutor
-- Docker infrastructure: `Dockerfile.frontend` (multi-stage Node build → nginx), `api/Dockerfile`, `docker-compose.yml` with healthchecks and memory limits
-- nginx config with security headers (CSP, X-Frame-Options, etc.), caching rules, and API proxy
-- `ops.sh` with status/logs/restart/deploy/ssl-renew commands
-- `CLAUDE.md` with full architecture documentation
+## What We Worked On
 
-### What's Next
-1. **On Mac**: `cd frontend && npm install && npm run dev` to start development
-2. **Copy assets**: Get logo/favicon files from toolsite1 into `frontend/public/images/`
-3. **Download fonts**: Get Work Sans + Fraunces woff2 files into `frontend/public/fonts/`
-4. **Wire up components**: Uncomment Preact component imports in each `.astro` page, add `client:load`
-5. **Port crop tool**: The drag/resize selection UI needs the pointer event logic from v1 `app.js`
-6. **Test all tools**: Upload real images, verify resize/crop/convert/HEIC/batch work client-side
-7. **GA4 + AdSense**: Create GA4 property, replace measurement ID placeholder; create AdSense ad units once approved
-8. **Deploy**: Push to VPS, `docker compose up -d --build`
-9. **Submit to Google**: Add to Search Console, submit sitemap, reapply for AdSense
+Took the v2.0 scaffold (created on Windows) and turned it into a working dev build on Mac. Downloaded self-hosted fonts, wired all 6 Preact tool components into their Astro pages, implemented the full interactive crop tool, fixed the landing page logo, added GA4 tracking, and improved the background remover error handling.
 
-### Key Decisions Made
-- **Astro + Preact** over Next.js (simpler, no Node runtime in prod, perfect Lighthouse scores)
-- **Client-side processing** for 5/6 tools (Canvas API, heic2any, JSZip) — true privacy
-- **Server-side bg removal only** — @imgly/background-removal requires COOP/COEP headers that break AdSense
-- **Dropped GIF/BMP** output (Canvas can't produce them; JPG/PNG/WebP covers 99.9% of use cases)
-- **50MB file limit** for client-side tools, 10MB for background remover
-- **Flat URLs** (`/resize`, `/crop`) for better SEO over nested `/tools/resize`
-- **300-500 words per page** with features + FAQ for AdSense publisher content approval
+### Changes
+
+| Area | Description |
+|------|-------------|
+| Fonts | Downloaded Work Sans (400/500/600) + Fraunces (600) woff2 from Google Fonts into `public/fonts/` |
+| Pages | Uncommented Preact imports and replaced placeholder divs with `client:load` components on all 6 tool pages |
+| Crop Tool | Full rewrite with drag-to-select, move, 8-handle resize, aspect ratio presets (Free, 1:1, 4:3, 3:4, 16:9, 9:16), auto-init on image load |
+| Landing Page | Fixed logo aspect ratio — was 140x140 (squished), now 83x140 matching the 500x847 source |
+| GA4 | Replaced `GA_MEASUREMENT_ID` placeholder with real ID `G-GBM8NRV9ZD` in Base.astro |
+| Background Remover | Added dev proxy (`/api` -> `localhost:8000`) in astro.config.mjs; improved error message when API is unreachable |
+
+---
+
+## Bugs Fixed
+
+| Bug | Fix |
+|-----|-----|
+| Logo squished on landing page | Changed width from 140 to 83 to match source aspect ratio |
+| "Something went wrong" on background remover | Added clear "API server not running" message + Vite dev proxy |
+
+---
+
+## Key Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| Added "Free" as default crop preset | Better UX — users expect unconstrained crop by default |
+| Used same variable font file for all Work Sans weights | Google Fonts serves a single variable woff2 for the latin subset |
+
+---
+
+## Next Steps
+
+1. **Deploy to VPS** — need SSH access; Hostinger MCP server configured but requires Claude Code restart to activate
+2. **Add OG image** — `public/images/og-default.png` for social sharing previews
+3. **AdSense** — submit finished site for approval, then replace `PLACEHOLDER_*` slot IDs
+4. **Test all tools end-to-end** in browser with real images
+5. **Run Lighthouse audit** — target 90+ on all metrics
+6. **Submit to Google Search Console** — add sitemap
+
+### Known Issues
+
+- Background remover requires FastAPI server running (`api/server.py`) — only tool that needs backend
+- Hostinger MCP server added to `.claude.json` but needs Claude Code restart to connect
+- VPS SSH: Mac's public key (`~/.ssh/id_ed25519.pub`) not yet authorized on server (76.13.29.227)
+
+---
+
+## Files Modified
+
+```
+frontend/
+├── public/fonts/
+│   ├── WorkSans-Regular.woff2      (new)
+│   ├── WorkSans-Medium.woff2       (new)
+│   ├── WorkSans-SemiBold.woff2     (new)
+│   └── Fraunces-SemiBold.woff2     (new)
+├── src/
+│   ├── layouts/Base.astro           (GA4 ID)
+│   ├── components/tools/
+│   │   ├── CropTool.tsx             (full rewrite)
+│   │   └── BackgroundRemover.tsx    (error handling)
+│   └── pages/
+│       ├── index.astro              (logo fix)
+│       ├── resize.astro             (wired component)
+│       ├── background-remover.astro (wired component)
+│       ├── convert.astro            (wired component)
+│       ├── heic-converter.astro     (wired component)
+│       ├── batch.astro              (wired component)
+│       └── crop.astro               (wired component)
+└── astro.config.mjs                 (dev proxy)
+```
+
+---
+
+*End of Handover*

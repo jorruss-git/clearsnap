@@ -74,11 +74,12 @@ Warm palette with CSS custom properties defined in `frontend/src/styles/global.c
 - Dark mode via `[data-theme="dark"]` on `<html>`
 
 ## TODOs for Implementation
-- [ ] Wire Preact tool components into `.astro` pages (uncomment imports, add `client:load`)
-- [ ] Port crop tool drag/resize logic from v1 (toolsite1/static/app.js lines 620-755, 978-1070)
-- [ ] Download and add self-hosted font woff2 files to `public/fonts/`
-- [ ] Replace `GA_MEASUREMENT_ID` placeholder with real GA4 ID
+- [x] Wire Preact tool components into `.astro` pages (uncomment imports, add `client:load`)
+- [x] Port crop tool drag/resize logic from v1
+- [x] Download and add self-hosted font woff2 files to `public/fonts/`
+- [x] Replace `GA_MEASUREMENT_ID` placeholder with real GA4 ID (G-GBM8NRV9ZD)
 - [ ] Create unique AdSense slot IDs in dashboard, replace `PLACEHOLDER_*` values
 - [ ] Add OG image to `public/images/og-default.png`
 - [ ] Test all tools end-to-end in browser
 - [ ] Run Lighthouse audit (target 90+ on all metrics)
+- [ ] Deploy to VPS via Docker Compose
